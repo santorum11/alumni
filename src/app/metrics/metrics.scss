@@ -1,0 +1,24 @@
+.metrics-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 34px 0;
+  background: #f7faff;
+  .metric {
+    background: white;
+    padding: 16px 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(34, 52, 84, 0.06);
+    .value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #377dff;
+    }
+    .desc {
+      font-size: 17px;
+      color: #616161;
+      font-weight: 600;
+    }
+  }
+}

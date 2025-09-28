@@ -1,0 +1,16 @@
+<div class="page-hero">
+  <h1>Programs & Events</h1>
+</div>
+
+<div class="page-content">
+  <p>Explore the upcoming events organized by the Mahalakshmi Nodal Alumni community. Mark your calendars and participate actively!</p>
+
+  <div class="events-list">
+    <div class="event-card" *ngFor="let event of events">
+      <div class="event-date">{{ event.date | date:'fullDate' }}</div>
+      <h3 class="event-title">{{ event.title }}</h3>
+      <p class="event-description">{{ event.description }}</p>
+      <p class="event-location" *ngIf="event.location">📍 {{ event.location }}</p>
+    </div>
+  </div>
+</div>

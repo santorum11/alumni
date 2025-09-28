@@ -1,0 +1,25 @@
+<div class="login-container">
+  <h2>Login to Alumni Portal</h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="input-group">
+      <label for="emailOrUsername">Email or Username</label>
+      <input id="emailOrUsername" type="text" formControlName="emailOrUsername" />
+      <div class="error" *ngIf="loginForm.get('emailOrUsername')?.touched && loginForm.get('emailOrUsername')?.invalid">
+        Please enter your email or username.
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input id="password" type="password" formControlName="password" />
+      <div class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+        Password is required.
+      </div>
+    </div>
+
+    <button type="submit" class="login-btn">Login</button>
+  </form>
+
+  <p class="register-text">Don't have an account? <a routerLink="/register">Register now</a></p>
+</div>

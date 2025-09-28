@@ -1,0 +1,33 @@
+.gallery-scroll {
+  overflow: hidden;
+  width: 100%;
+  max-width: 100vw;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 32px;     // increase gap to suit larger images
+  animation: scrollLeft 30s linear infinite;
+}
+
+
+.gallery-track img {
+  width: 620px;  // increased width
+  height: 320px; // increased height to keep aspect ratio
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(33,33,109,0.25);
+}
+
+
+/* Scroll left infinitely */
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

@@ -1,0 +1,67 @@
+.page-hero {
+  background: #377dff;
+  color: white;
+  padding: 48px 32px;
+  border-radius: 14px;
+  text-align: center;
+  margin-bottom: 36px;
+
+  h1 {
+    font-size: 3.4rem;
+    font-weight: 900;
+  }
+}
+
+.page-content {
+  max-width: 860px;
+  margin: 0 auto;
+  font-size: 1.25rem;
+  color: #222;
+
+  p {
+    margin-bottom: 36px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+}
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.event-card {
+  border: 1.7px solid #a2a9cc;
+  border-radius: 18px;
+  padding: 28px 32px;
+  box-shadow: 0 6px 22px rgb(136 152 255 / 0.16);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 10px 38px rgb(92, 125, 255, 0.28);
+    transform: translateY(-6px);
+  }
+
+  .event-date {
+    color: #4668ff;
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+  }
+  .event-title {
+    font-size: 1.9rem;
+    font-weight: 900;
+    margin-bottom: 12px;
+    color: #2333cc;
+  }
+  .event-description {
+    font-size: 1.28rem;
+    margin-bottom: 12px;
+    color: #3c3c74;
+  }
+  .event-location {
+    font-size: 1.15rem;
+    color: #5a6184;
+  }
+}

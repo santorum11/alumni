@@ -1,0 +1,40 @@
+<div class="contact-container">
+  <h2>Contact Us</h2>
+  <p>We would love to hear from you. Please fill the form below and we will get in touch shortly.</p>
+
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div class="input-group">
+      <label for="fullName">Full Name *</label>
+      <input id="fullName" type="text" formControlName="fullName" />
+      <div class="error" *ngIf="contactForm.get('fullName')?.touched && contactForm.get('fullName')?.invalid">
+        Name is required.
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="email">Email *</label>
+      <input id="email" type="email" formControlName="email" />
+      <div class="error" *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.invalid">
+        Enter a valid email.
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="subject">Subject *</label>
+      <input id="subject" type="text" formControlName="subject" />
+      <div class="error" *ngIf="contactForm.get('subject')?.touched && contactForm.get('subject')?.invalid">
+        Subject is required.
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="message">Message *</label>
+      <textarea id="message" formControlName="message"></textarea>
+      <div class="error" *ngIf="contactForm.get('message')?.touched && contactForm.get('message')?.invalid">
+        Message is required.
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Send Message</button>
+  </form>
+</div>

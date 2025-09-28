@@ -1,0 +1,169 @@
+.hero-over-banner {
+  width: 98vw;
+  margin-left: -49vw;
+  left: 50%;
+  right: 50%;
+  position: relative;
+  min-height: 800px;
+  background: 
+    linear-gradient(rgba(37,51,82,0.38), rgba(37,51,82,0.16)), /* overlay for readability */
+    url("/hero-banner.jpg") center center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 50px 20px;
+  text-align: center;
+  box-shadow: 0 3px 22px rgba(42, 42, 42, 0.08);
+
+  .hero-over-banner::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+  h1 {
+    font-size: 3.2rem;
+    font-weight: 900;
+    margin-bottom: 18px;
+    .community {
+      background: #ffc13c;
+      color: #2333cc;
+      padding: 0 15px;
+      border-radius: 7px;
+      display: inline-block;
+      margin-left: 10px;
+      font-weight: 900;
+    }
+  }
+  .subtitle-banner {
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding: 16px 30px;
+  border-radius: 14px;
+  text-align: center;
+  animation: colorCycle 6s linear infinite, floatY 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes colorCycle {
+  0% { color: #ff6b6b; }
+  20% { color: #feca57; }
+  40% { color: #48dbfb; }
+  60% { color: #1dd1a1; }
+  80% { color: #5f27cd; }
+  100% { color: #ff6b6b; }
+}
+
+@keyframes floatY {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-20px); }
+}
+
+  // Optional: make main "Community" block pop
+  h1 .community {
+    box-shadow: 0 4px 16px #ffa72677;
+    text-shadow: 0 2px 8px #f2a43777;
+    letter-spacing: 1.2px;
+  }
+  p {
+    font-size: 1.23rem;
+    margin-bottom: 32px;
+    color: #eeeff6;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.18);
+  }
+  .hero-actions {
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+    margin-bottom: 33px;
+    flex-wrap: wrap;
+    .hero-btn {
+      font-size: 1.18rem;
+      font-weight: 700;
+      padding: 17px 42px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .13s, color .13s;
+      &.main { background: #ffc13c; color: #222; }
+      &.main:hover { background: #ff9e00; color: #fff; }
+      &.outline { background: #fff; border: 2.5px solid #fff; color: #000;}
+      &.outline:hover { background: #fff; color: #224cf9;}
+      display: flex; align-items: center; gap: 13px;
+    }
+  }
+  .jubilee-badge {
+    margin: 0 auto;
+    background: #ffd568;
+    color: #35426a;
+    border-radius: 16px;
+    font-size: 1.23rem;
+    font-weight: 700;
+    padding: 11px 27px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    box-shadow: 0 2px 10px rgba(34,52,84,0.15);
+  }
+}
+
+
+.about-box {
+  max-width: 650px;
+  margin: 56px auto 32px auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 30px rgba(34,52,84,0.10), 0 1.5px 18px rgba(34,157,255,0.04);
+  padding: 40px 34px 32px 34px;
+  text-align: center;
+
+  h2 {
+    font-size: 2.85rem;
+    font-weight: 900;
+    color: #1e2746;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+    span {
+      display: inline-block;
+      border-bottom: 4px solid #377dff;
+      padding-bottom: 4px;
+    }
+  }
+
+  p {
+    font-size: 1.45rem;
+    color: #2a2c39;
+    font-weight: 500;
+    line-height: 1.55;
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  .about-icon {
+  margin-bottom: 12px;
+  font-size: 2.3rem;
+  color: #377dff;
+}
+}
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+  .orange-block {
+    font-size: 2.5rem;
+    padding: 0 4px;
+  }
+  .buttons {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .main-btn, .secondary-btn {
+    width: 100%;
+    padding: 14px 0;
+    font-size: 1.2rem;
+  }
+  .banner-full img {
+    width: 100%;
+  }
+}
