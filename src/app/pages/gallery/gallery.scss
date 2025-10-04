@@ -8,21 +8,41 @@
 
 .gallery-track {
   display: flex;
-  gap: 32px;     // increase gap to suit larger images
+  gap: 32px;
   animation: scrollLeft 30s linear infinite;
 }
 
-
 .gallery-track img {
-  width: 620px;  // increased width
-  height: 320px; // increased height to keep aspect ratio
+  width: 620px;
+  height: 320px;
   object-fit: cover;
   border-radius: 14px;
   box-shadow: 0 4px 16px rgba(33,33,109,0.25);
+  flex-shrink: 0;
 }
 
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .gallery-track img {
+    width: 460px;
+    height: 240px;
+  }
+}
 
-/* Scroll left infinitely */
+@media (max-width: 768px) {
+  .gallery-track img {
+    width: 320px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-track img {
+    width: 220px;
+    height: 110px;
+  }
+}
+
 @keyframes scrollLeft {
   0% {
     transform: translateX(0%);

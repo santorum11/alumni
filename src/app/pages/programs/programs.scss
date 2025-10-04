@@ -35,11 +35,11 @@
   border: 1.7px solid #a2a9cc;
   border-radius: 18px;
   padding: 28px 32px;
-  box-shadow: 0 6px 22px rgb(136 152 255 / 0.16);
+  box-shadow: 0 6px 22px rgba(136, 152, 255, 0.16);
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 
   &:hover {
-    box-shadow: 0 10px 38px rgb(92, 125, 255, 0.28);
+    box-shadow: 0 10px 38px rgba(92, 125, 255, 0.28);
     transform: translateY(-6px);
   }
 
@@ -63,5 +63,55 @@
   .event-location {
     font-size: 1.15rem;
     color: #5a6184;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .page-hero {
+    padding: 36px 24px;
+
+    h1 {
+      font-size: 2.6rem;
+    }
+  }
+  .page-content {
+    max-width: 90%;
+    font-size: 1.1rem;
+  }
+  .event-card {
+    padding: 24px 20px;
+    .event-title {
+      font-size: 1.6rem;
+    }
+    .event-description,
+    .event-location,
+    .event-date {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .page-hero {
+    padding: 24px 16px;
+
+    h1 {
+      font-size: 2.2rem;
+    }
+  }
+  .page-content {
+    font-size: 1rem;
+  }
+  .event-card {
+    padding: 20px 15px;
+    .event-title {
+      font-size: 1.4rem;
+    }
+    .event-description,
+    .event-location,
+    .event-date {
+      font-size: 0.95rem;
+    }
   }
 }

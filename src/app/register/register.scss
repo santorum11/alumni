@@ -16,7 +16,7 @@
 
   form {
     text-align: left;
-
+    
     .input-group {
       margin-bottom: 18px;
 
@@ -25,13 +25,13 @@
         font-weight: 600;
         margin-bottom: 8px;
         color: #1f2c70;
-        padding-left: 6px;  // Add left padding for balanced spacing
+        padding-left: 6px;
       }
 
       input, textarea {
         width: 100%;
         font-size: 1.2rem;
-        padding: 12px 16px;  // Left and right padding balanced
+        padding: 12px 16px;
         border-radius: 8px;
         border: 1.5px solid #c4c5ca;
         outline-offset: 2px;
@@ -40,6 +40,10 @@
         &:focus {
           border-color: #377dff;
           outline-color: #377dff;
+        }
+        ::placeholder {
+        color: #ccc;
+        font-family: serif;
         }
       }
 
@@ -56,17 +60,32 @@
           flex: 1;
           label, input {
             width: 100%;
-            padding-left: 6px; // Maintain padding here too if labels present
+            padding-left: 6px;
           }
         }
       }
+
+      select {
+            width: 100%;
+            font-size: 1.2rem;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1.5px solid #c4c5ca;
+            outline-offset: 2px;
+            box-sizing: border-box;
+
+            &:focus {
+                border-color: #377dff;
+                outline-color: #377dff;
+            }
+        }
 
       .error {
         font-size: 1rem;
         font-style: italic;
         color: #d84727;
         margin-top: 4px;
-        padding-left: 6px;   // Left padding for error message alignment
+        padding-left: 6px;
       }
     }
 
@@ -86,6 +105,61 @@
       &:hover {
         background: #1d54d5;
       }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .register-container {
+    max-width: 90%;
+    padding: 28px 20px;
+
+    h2 {
+      font-size: 2.2rem;
+    }
+
+    form .input-group {
+      label {
+        padding-left: 4px;
+        font-size: 1.05rem;
+      }
+      input, textarea {
+        padding: 12px 14px;
+        font-size: 1.1rem;
+      }
+    }
+
+    .submit-btn {
+      font-size: 1.4rem;
+      padding: 16px 24px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .register-container {
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 20px 16px;
+
+    h2 {
+      font-size: 1.9rem;
+    }
+
+    form .input-group {
+      label {
+        padding-left: 3px;
+        font-size: 1rem;
+      }
+      input, textarea {
+        font-size: 1rem;
+        padding: 10px 12px;
+      }
+    }
+
+    .submit-btn {
+      font-size: 1.3rem;
+      padding: 14px 20px;
     }
   }
 }

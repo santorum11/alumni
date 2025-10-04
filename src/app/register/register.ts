@@ -1,39 +1,65 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Api } from '../api';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, HttpClientModule],
   templateUrl: './register.html',
-  styleUrls: ['./register.scss']
+  styleUrls: ['./register.scss'],
+  providers: [Api]
 })
-export class Register {
-  registerForm: FormGroup;
+export class Register implements OnInit {
+  registrationForm!: FormGroup;
+  bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+  foodPreferences = ['Vegetarian', 'Non-Vegetarian', 'Vegan'];
+  today = new Date();
 
-  constructor(private fb: FormBuilder) {
-    this.registerForm = this.fb.group({
+  selectedFile: File | null = null;
+
+  constructor(private fb: FormBuilder, private api: Api) {}
+
+  ngOnInit() {
+    this.registrationForm = this.fb.group({
       fullName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern(/^\d{10,15}$/)]],
-      address: [''],
-      city: [''],
-      state: [''],
-      pincode: [''],
-      graduationYear: ['', [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear())]],
-      message: ['']
+      gender: ['', Validators.required],
+      dob: [''],
+      bloodGroup: [''],
+      foodPreference: [''],
+      contactNumber: [''],
+      emailId: ['', [Validators.email]],
+      currentAddress: [''],
+      yearOfAdmission: [''],
+      yearOfPassing: [''],
+      batch: [''],
+      occupation: [''],
+      organization: [''],
+      areaOfExpertise: [''],
+      mentorJuniors: [''],
+      donate: [''],
+      availableForReunion: [''],
     });
   }
 
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    }
+  }
+
   onSubmit() {
-    if (this.registerForm.valid) {
-      console.log('Form Data:', this.registerForm.value);
-      alert('Registration submitted successfully!');
-      this.registerForm.reset();
+    if (this.registrationForm.valid) {
+      const formData = { ...this.registrationForm.value };
+      this.api.post('register', formData).subscribe({
+        next: () => alert('Registration successful!'),
+        error: () => alert('Registration failed!')
+      });
     } else {
-      this.registerForm.markAllAsTouched();
+      this.registrationForm.markAllAsTouched();
     }
   }
 }

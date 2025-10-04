@@ -1,63 +1,124 @@
 <div class="register-container">
-  <h2>Register Now</h2>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <h2>Alumni Registration Form</h2>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="input-group">
-      <label for="fullName">Full Name *</label>
-      <input type="text" id="fullName" formControlName="fullName" />
-      <div class="error" *ngIf="registerForm.get('fullName')?.touched && registerForm.get('fullName')?.invalid">
-        Name is required.
+      <label for="fullName">Full Name</label>
+      <input id="fullName" formControlName="fullName" type="text" required />
+      <div *ngIf="registrationForm.get('fullName')?.invalid && registrationForm.get('fullName')?.touched" class="error">
+        Full Name is required.
       </div>
     </div>
 
     <div class="input-group">
-      <label for="email">Email *</label>
-      <input type="email" id="email" formControlName="email" />
-      <div class="error" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
-        Enter a valid email.
-      </div>
+      <label for="gender">Gender</label>
+      <select id="gender" formControlName="gender">
+        <option value="" disabled selected>Select</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+      <div *ngIf="registrationForm.get('gender')?.invalid && registrationForm.get('gender')?.touched" class="error">Select gender.</div>
     </div>
 
     <div class="input-group">
-      <label for="phone">Phone *</label>
-      <input type="text" id="phone" formControlName="phone" maxlength="15" />
-      <div class="error" *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid">
-        Enter a valid phone number.
-      </div>
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" formControlName="dob" max="{{today | date:'yyyy-MM-dd'}}" />
     </div>
 
     <div class="input-group">
-      <label for="address">Address</label>
-      <input type="text" id="address" formControlName="address" />
+      <label for="bloodGroup">Blood Group</label>
+      <select id="bloodGroup" formControlName="bloodGroup">
+        <option value="" disabled selected>Select</option>
+        <option *ngFor="let bg of bloodGroups">{{bg}}</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="foodPreference">Food Preference</label>
+      <select id="foodPreference" formControlName="foodPreference">
+        <option value="" disabled selected>Select</option>
+        <option *ngFor="let fp of foodPreferences">{{fp}}</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="contactNumber">Contact Number</label>
+      <input id="contactNumber" formControlName="contactNumber" type="tel" />
+    </div>
+
+    <div class="input-group">
+      <label for="emailId">Email ID</label>
+      <input id="emailId" formControlName="emailId" type="email" />
+    </div>
+
+    <div class="input-group">
+      <label for="currentAddress">Current Address</label>
+      <textarea id="currentAddress" formControlName="currentAddress"></textarea>
     </div>
 
     <div class="input-group small-inputs">
       <div>
-        <label for="city">City</label>
-        <input type="text" id="city" formControlName="city" />
+        <label for="yearOfAdmission">Year of Admission</label>
+        <input id="yearOfAdmission" formControlName="yearOfAdmission" type="number" />
       </div>
       <div>
-        <label for="state">State</label>
-        <input type="text" id="state" formControlName="state" />
-      </div>
-      <div>
-        <label for="pincode">Pin Code</label>
-        <input type="text" id="pincode" formControlName="pincode" />
+        <label for="yearOfPassing">Year of Passing</label>
+        <input id="yearOfPassing" formControlName="yearOfPassing" type="number" />
       </div>
     </div>
 
     <div class="input-group">
-      <label for="graduationYear">Graduation Year *</label>
-      <input type="number" id="graduationYear" formControlName="graduationYear" />
-      <div class="error" *ngIf="registerForm.get('graduationYear')?.touched && registerForm.get('graduationYear')?.invalid">
-        Enter a valid year.
-      </div>
+      <label for="batch">Batch / Class</label>
+      <input id="batch" formControlName="batch" type="text" />
     </div>
 
     <div class="input-group">
-      <label for="message">Message (Optional)</label>
-      <textarea id="message" formControlName="message"></textarea>
+      <label for="occupation">Current Occupation / Designation</label>
+      <input id="occupation" formControlName="occupation" type="text" />
     </div>
 
-    <button type="submit" class="submit-btn">Submit</button>
+    <div class="input-group">
+      <label for="organization">Organization / Company</label>
+      <input id="organization" formControlName="organization" type="text" />
+    </div>
+
+    <div class="input-group">
+      <label for="areaOfExpertise">Area of Expertise</label>
+      <input id="areaOfExpertise" formControlName="areaOfExpertise" type="text" />
+    </div>
+
+    <div class="input-group">
+      <label for="mentorJuniors">Willing to Mentor Juniors?</label>
+      <select id="mentorJuniors" formControlName="mentorJuniors">
+        <option value="" disabled selected>Select</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="donate">Interested in Donating / Supporting?</label>
+      <select id="donate" formControlName="donate">
+        <option value="" disabled selected>Select</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="availableForReunion">Available for Reunion / Programs?</label>
+      <select id="availableForReunion" formControlName="availableForReunion">
+        <option value="" disabled selected>Select</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="profilePic">Upload Profile Picture</label>
+      <input id="profilePic" type="file" (change)="onFileSelected($event)" />
+    </div>
+
+    <button class="submit-btn" type="submit" [disabled]="registrationForm.invalid">Submit Registration</button>
   </form>
 </div>

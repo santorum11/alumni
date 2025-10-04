@@ -3,13 +3,50 @@
     <img src="logo.png" alt="School Logo" class="logo" />
     <span class="title">Mahalakshmi Nodal Alumni Portal</span>
   </div>
-  <ul class="nav-menu">
-    <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/about">About</a></li>
-    <li><a routerLink="/gallery">Gallery</a></li>
-    <li><a routerLink="/programs">Programs</a></li>
-    <li><a routerLink="/contact">Contact</a></li>
-    <li><a routerLink="/register" class="nav-link register-link">Register Now</a></li>
+  <button class="hamburger" (click)="toggleMenu()" aria-label="Toggle menu" [attr.aria-expanded]="isMenuOpen">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <ul class="nav-menu" [class.menu-active]="isMenuOpen">
+    <li class="dropdown">
+      <button class="dropdown-toggle" (click)="toggleDropdown(0)">Essential Buttons</button>
+      <ul class="dropdown-menu" [class.show]="isDropdownOpen[0]">
+        <li><a routerLink="/" (click)="closeAll()">Home 🏠</a></li>
+        <li><a routerLink="/about" (click)="closeAll()">About Us ℹ️</a></li>
+        <li><a routerLink="/our-school" (click)="closeAll()">Our School / College 🎓</a></li>
+        <li><a routerLink="/register" (click)="closeAll()">Alumni Registration 📝</a></li>
+        <li><a routerLink="/login" (click)="closeAll()">Member Login 🔑</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <button class="dropdown-toggle" (click)="toggleDropdown(1)">Alumni Engagement</button>
+      <ul class="dropdown-menu" [class.show]="isDropdownOpen[1]">
+        <li><a routerLink="/directory" (click)="closeAll()">Alumni Directory 📖</a></li>
+        <li><a routerLink="/stories" (click)="closeAll()">Success Stories 🌟</a></li>
+        <li><a routerLink="/achievements" (click)="closeAll()">Achievements 🏆</a></li>
+        <li><a routerLink="/gallery" (click)="closeAll()">Memories / Gallery 📸</a></li>
+        <li><a routerLink="/events" (click)="closeAll()">Events & Reunions 🎉</a></li>
+        <li><a routerLink="/donate" (click)="closeAll()">Donate / Support ❤️</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <button class="dropdown-toggle" (click)="toggleDropdown(2)">Communication</button>
+      <ul class="dropdown-menu" [class.show]="isDropdownOpen[2]">
+        <li><a routerLink="/news" (click)="closeAll()">News & Updates 📰</a></li>
+        <li><a routerLink="/forum" (click)="closeAll()">Discussion Forum 💬</a></li>
+        <li><a routerLink="/contact" (click)="closeAll()">Contact Us 📩</a></li>
+        <li><a routerLink="/feedback" (click)="closeAll()">Feedback ✍️</a></li>
+        <li><a routerLink="/map" (click)="closeAll()">Google Map Option</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <button class="dropdown-toggle" (click)="toggleDropdown(3)">Quick Access</button>
+      <ul class="dropdown-menu" [class.show]="isDropdownOpen[3]">
+        <li><a routerLink="/jubilee" (click)="closeAll()">Golden Jubilee 2025 ✨</a></li>
+        <li><a routerLink="/teachers-corner" (click)="closeAll()">Teachers' Corner 👩‍🏫</a></li>
+        <li><a routerLink="/student-achievements" (click)="closeAll()">Student Achievements 🌱</a></li>
+      </ul>
+    </li>
   </ul>
-  <button routerLink="/login" class="login-btn">Login</button>
 </nav>
