@@ -1,0 +1,13 @@
+<div class="events-container">
+  <h2>Events & Programmes (Dec 15–20, 2025)</h2>
+  <div class="event-card" *ngFor="let event of events">
+    <div class="event-date">
+      <span class="date">{{ event.date }}</span>
+      <span class="time">{{ event.time }}</span>
+    </div>
+    <div class="event-info">
+      <div class="event-name">{{ event.name }}</div>
+      <div class="event-venue"><span class="venue-label">Venue:</span> {{ event.venue }}</div>
+    </div>
+  </div>
+</div>

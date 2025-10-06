@@ -24,6 +24,16 @@
 
 .menu-active { display: flex !important; }
 
+.nav-menu,
+.dropdown-menu {
+  list-style: none;
+  padding-left: 0;
+}
+
+.nav-menu li, .dropdown-menu li {
+  list-style-type: none;
+}
+
 .dropdown { position: relative; }
 .dropdown-toggle {
   background: none; border: none; font-weight: 700; font-size: 1.02rem; cursor: pointer; color: #223276; padding: 8px 18px; border-radius: 7px; transition: background 0.13s;
