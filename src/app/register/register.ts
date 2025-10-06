@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [ReactiveFormsModule, CommonModule, HttpClientModule],
   templateUrl: './register.html',
   styleUrls: ['./register.scss'],
-  providers: [Api]
+  providers: [Api], 
 })
 export class Register implements OnInit {
   registrationForm!: FormGroup;
@@ -52,12 +52,38 @@ export class Register implements OnInit {
   }
 
   onSubmit() {
+    // if (this.registrationForm.valid) {
+    //   const formData = { ...this.registrationForm.value };
+    //   this.api.post('register', formData).subscribe({
+    //     next: () => alert('Registration successful!'),
+    //     error: () => alert('Registration failed!')
+    //   });
+    // } else {
+    //   this.registrationForm.markAllAsTouched();
+    // }
     if (this.registrationForm.valid) {
-      const formData = { ...this.registrationForm.value };
-      this.api.post('register', formData).subscribe({
-        next: () => alert('Registration successful!'),
-        error: () => alert('Registration failed!')
+      const formData = new FormData();
+      Object.entries(this.registrationForm.value).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+          if (typeof value === 'object') {
+            const jsonValue = JSON.stringify(value);
+            if (jsonValue !== '{}') {
+              formData.append(key, jsonValue);
+            }
+          } else {
+            formData.append(key, String(value));
+          }
+        }
       });
+
+    if (this.selectedFile) {
+      formData.append('profilePic', this.selectedFile, this.selectedFile.name);
+    }
+
+    this.api.post('register', formData).subscribe({
+      next: () => alert('Registration successful!'),
+      error: () => alert('Registration failed!')
+    });
     } else {
       this.registrationForm.markAllAsTouched();
     }

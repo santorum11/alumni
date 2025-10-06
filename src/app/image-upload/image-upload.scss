@@ -1,0 +1,80 @@
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 350px;
+  margin-top: 32px;
+}
+
+.upload-container h2 {
+  margin-bottom: 22px;
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: #183a5a;
+  letter-spacing: 1px;
+}
+
+.upload-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: #f5faff;
+  box-shadow: 0 0 8px rgba(24,58,90,0.05);
+  border-radius: 12px;
+  padding: 24px 32px;
+  margin-bottom: 22px;
+}
+
+.choose-label {
+  display: flex; 
+  align-items: center; 
+  gap: 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 0 2px #bbb;
+  padding: 12px 18px;
+  transition: background 0.2s;
+}
+.choose-label:hover {
+  background: #e3f2fd;
+}
+.file-count {
+  font-weight: 500;
+  color: #1976d2;
+  font-size: 1.05rem;
+}
+
+.upload-btn {
+  height: 40px;
+  min-width: 130px;
+  font-weight: 600;
+}
+
+.progress-container {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.progress-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #1976d2;
+  margin-top: 0;
+}
+
+@media (max-width: 600px) {
+  .upload-card {
+    flex-direction: column;
+    gap: 16px;
+    padding: 18px 12px;
+  }
+  .progress-container {
+    width: 92vw;
+  }
+}

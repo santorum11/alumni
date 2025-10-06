@@ -7,10 +7,18 @@
   </div>
 </div> -->
 
+<!-- <div class="gallery-scroll">
+  <div class="gallery-track">
+    <img *ngFor="let i of [1,2,3,4,5,6]" src="gallery{{i}}.jpg" alt="Gallery image {{i}}" /> -->
+    <!-- Duplicate images for seamless looping -->
+    <!-- <img *ngFor="let i of [1,2,3,4,5,6]" src="gallery{{i}}.jpg" alt="Gallery image duplicate {{i}}" />
+  </div>
+</div> -->
+
 <div class="gallery-scroll">
   <div class="gallery-track">
-    <img *ngFor="let i of [1,2,3,4,5,6]" src="gallery{{i}}.jpg" alt="Gallery image {{i}}" />
-    <!-- Duplicate images for seamless looping -->
-    <img *ngFor="let i of [1,2,3,4,5,6]" src="gallery{{i}}.jpg" alt="Gallery image duplicate {{i}}" />
+    <img *ngFor="let img of images" [src]="'http://localhost:3000/uploads/' + img" alt="Gallery image" />
+    <!-- Loop again for effect if you want -->
+    <img *ngFor="let img of images" [src]="'http://localhost:3000/uploads/' + img" alt="Gallery image duplicate" />
   </div>
 </div>

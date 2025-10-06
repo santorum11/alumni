@@ -1,0 +1,22 @@
+<!-- <h2>Upload Images to Gallery</h2>
+<input type="file" multiple (change)="onFileSelected($event)" accept="image/*" />
+<button mat-raised-button color="primary" (click)="uploadFiles()">Upload Images</button>
+<mat-progress-bar mode="determinate" [value]="uploadProgress"></mat-progress-bar> -->
+
+<div class="upload-container">
+  <h2>Upload Images to Gallery</h2>
+  <div class="upload-card">
+    <input type="file" id="file-input" multiple (change)="onFileSelected($event)" accept="image/*" hidden />
+    <label for="file-input" class="choose-label" mat-raised-button>
+      <span>Choose Images</span>
+      <span class="file-count" *ngIf="selectedFiles.length">{{ selectedFiles.length }} selected</span>
+    </label>
+    <button mat-raised-button color="primary" (click)="uploadFiles()" [disabled]="selectedFiles.length === 0" class="upload-btn">
+      Upload Images
+    </button>
+  </div>
+  <div class="progress-container" *ngIf="uploadProgress > 0">
+    <mat-progress-bar mode="determinate" [value]="uploadProgress"></mat-progress-bar>
+    <div class="progress-text">{{uploadProgress}}%</div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="blog-forum-container">
+  <h2>Discussion Forum</h2>
+
+  <!-- Form to add blog -->
+  <form (submit)="postNewBlog()" class="blog-post-form">
+    <input [(ngModel)]="newBlog.title" name="title" placeholder="Blog title" required />
+    <textarea [(ngModel)]="newBlog.content" name="content" placeholder="Write your blog..." required></textarea>
+    <button type="submit" [disabled]="!newBlog.title || !newBlog.content">Post Blog</button>
+  </form>
+
+  <!-- List blogs -->
+  <div *ngFor="let blog of blogs" class="blog-post">
+    <h3>{{ blog.title }}</h3>
+    <p>{{ blog.content }}</p>
+
+    <div class="actions">
+      <button (click)="vote(blog.id, 'blog', 'like')">👍 {{ blog.likesCount || 0 }}</button>
+      <button (click)="vote(blog.id, 'blog', 'dislike')">👎 {{ blog.dislikesCount || 0 }}</button>
+      <button *ngIf="isAdmin" (click)="deleteBlog(blog.id)">Delete</button>
+    </div>
+
+    <!-- Comments -->
+    <div class="comments-section">
+      <div *ngFor="let comment of blog.comments" class="comment">
+        <p>{{ comment.comment }}</p>
+        <div class="actions">
+          <button (click)="vote(comment.id, 'comment', 'like')">👍 {{ comment.likesCount || 0 }}</button>
+          <button (click)="vote(comment.id, 'comment', 'dislike')">👎 {{ comment.dislikesCount || 0 }}</button>
+          <button *ngIf="isAdmin" (click)="deleteComment(comment.id)">Delete</button>
+        </div>
+      </div>
+      <input [(ngModel)]="newComments[blog.id]" placeholder="Write a comment..." />
+      <button (click)="addComment(blog.id)" [disabled]="!newComments[blog.id]">Comment</button>
+    </div>
+  </div>
+</div>

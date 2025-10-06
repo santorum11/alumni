@@ -1,0 +1,67 @@
+<mat-tab-group>
+  <!-- Tab 1: Registered Users (default) -->
+  <mat-tab label="Registered Users">
+    <h2>Registered Alumni</h2>
+    <mat-table [dataSource]="users" class="mat-elevation-z8">
+    <ng-container matColumnDef="profilePic">
+        <mat-header-cell *matHeaderCellDef>Profile Picture</mat-header-cell>
+            <mat-cell *matCellDef="let user" (click)="openDetails(user)">
+                @if (user.profilePicPath) {
+                  <img [src]="'http://localhost:3000/' + user.profilePicPath" 
+                    alt="{{user.fullName}}" class="profile-pic" />
+                } @else {
+                    <span>No Image</span>
+                }
+            </mat-cell>
+    </ng-container>
+      <ng-container matColumnDef="fullName">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.fullName }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="emailId">
+        <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.emailId }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="batch">
+        <mat-header-cell *matHeaderCellDef>Batch</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.batch }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="contactNumber">
+        <mat-header-cell *matHeaderCellDef>Contact Number</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.contactNumber }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="yearOfPassing">
+        <mat-header-cell *matHeaderCellDef>Year of Passing</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.yearOfPassing }}</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDetails(row)"></mat-row>
+    </mat-table>
+  </mat-tab>
+
+  <!-- Tab 2: Upload (admin only) -->
+  <mat-tab label="Gallery Upload" *ngIf="isAdmin">
+    <!-- <h3>Upload Images for Gallery (Admin Only)</h3>
+    <input type="file" multiple (change)="onFileSelected($event)" accept="image/*">
+    <button mat-raised-button color="primary" (click)="uploadFiles()">Upload Images</button>
+    <mat-progress-bar mode="determinate" [value]="uploadProgress"></mat-progress-bar> -->
+    <div class="upload-container">
+  <h2>Upload Images to Gallery</h2>
+  <div class="upload-card">
+    <input type="file" id="file-input" multiple (change)="onFileSelected($event)" accept="image/*" hidden />
+    <label for="file-input" class="choose-label" mat-raised-button>
+      <span>Choose Images</span>
+      <span class="file-count" *ngIf="selectedFiles.length">{{ selectedFiles.length }} selected</span>
+    </label>
+    <button mat-raised-button color="primary" (click)="uploadFiles()" [disabled]="selectedFiles.length === 0" class="upload-btn">
+      Upload Images
+    </button>
+  </div>
+  <div class="progress-container" *ngIf="uploadProgress > 0">
+    <mat-progress-bar mode="determinate" [value]="uploadProgress"></mat-progress-bar>
+    <div class="progress-text">{{uploadProgress}}%</div>
+  </div>
+</div>
+  </mat-tab>
+</mat-tab-group>

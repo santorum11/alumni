@@ -1,0 +1,90 @@
+.details-dialog-wrapper {
+  width: 600px;
+  max-width: 95vw;
+  padding: 0 5px 16px 5px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.profile-img-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px 0 20px 0;
+}
+
+.profile-pic-large, .no-image-placeholder {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #f0f0f0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+  font-size: 16px;
+  color: #888;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.details-grid > div {
+  font-size: 15px;
+  line-height: 1.8;
+  word-break: break-word;
+}
+
+.close-btn {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  z-index: 1;
+  font-size: 26px;
+  color: #888;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.close-btn:hover {
+  color: #c00;
+  background: transparent;
+}
+
+
+@media (max-width: 700px) {
+  .details-dialog-wrapper {
+    width: 100vw;
+    min-width: unset;
+    max-width: 98vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
+  .details-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
+  .profile-img-wrapper {
+    margin-top: 10px;
+    margin-bottom: 16px;
+  }
+}
+
+/* Extra: style for dialog actions if needed */
+.dialog-actions {
+  text-align: right;
+  margin-top: 12px;
+}

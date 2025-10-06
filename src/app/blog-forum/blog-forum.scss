@@ -1,0 +1,170 @@
+.blog-forum-container {
+  max-width: 780px;
+  margin: 36px auto;
+  background: #fafbff;
+  padding: 36px 30px 30px 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(44,62,80,0.09);
+
+  h2 {
+    font-size: 2.3rem;
+    color: #224477;
+    letter-spacing: 2px;
+    margin-bottom: 28px;
+    text-align: center;
+    font-weight: 800;
+  }
+
+  .blog-post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 38px;
+
+    input, textarea {
+      border: 1.7px solid #c5cadf;
+      border-radius: 8px;
+      padding: 13px 13px;
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      transition: border-color 0.2s;
+      background: #fff;
+      &:focus {
+        border-color: #3185fc;
+        outline: none;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    button {
+      align-self: flex-end;
+      padding: 10px 30px;
+      background: #3185fc;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.09rem;
+      font-weight: 600;
+      transition: background 0.16s;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(49, 133, 252, 0.1);
+      &:hover {
+        background: #2563d6;
+      }
+    }
+  }
+
+  .blog-post {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px 20px 18px 20px;
+    margin-bottom: 28px;
+    box-shadow: 0 6px 22px rgba(39, 57, 103, 0.08);
+
+    h3 {
+      font-size: 1.38rem;
+      margin-bottom: 6px;
+      color: #18406a;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    p {
+      font-size: 1.07rem;
+      color: #28353e;
+      margin-bottom: 14px;
+      white-space: pre-line;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 14px;
+
+      button {
+        font-size: 1.05rem;
+        background: none;
+        border: none;
+        color: #255fcc;
+        cursor: pointer;
+        padding: 6px 10px;
+        border-radius: 7px;
+        transition: background 0.18s;
+        &:hover {
+          background: #f1f5ff;
+        }
+      }
+
+      .delete-btn {
+        color: #c0392b;
+      }
+    }
+
+    .comments-section {
+      border-top: 1.2px solid #e7eaf1;
+      padding-top: 16px;
+
+      .comment {
+        display: flex;
+        flex-direction: column;
+        background: #f5faff;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        padding: 12px 9px 7px 15px;
+
+        p {
+          margin: 0 0 8px 0;
+          color: #363c44;
+        }
+
+        .actions {
+          gap: 10px;
+          margin-bottom: 0;
+
+          button {
+            font-size: 14px;
+          }
+          .delete-btn {
+            color: #c0392b;
+          }
+        }
+      }
+
+      input {
+        width: 78%;
+        font-size: 1.06rem;
+        padding: 9px 12px;
+        border: 1.4px solid #b9bfcf;
+        border-radius: 7px;
+        margin-right: 12px;
+        background: #fff;
+      }
+
+      button {
+        padding: 8px 20px;
+        border-radius: 7px;
+        background: #2bbd7e;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1.01rem;
+        transition: background 0.16s;
+        &:hover {
+          background: #149e63;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px){
+  .blog-forum-container{
+    padding: 16px 5px 20px 5px;
+  }
+}

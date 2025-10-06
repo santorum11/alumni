@@ -1,0 +1,40 @@
+<button mat-icon-button mat-dialog-close class="close-btn" aria-label="Close dialog">
+  <span aria-hidden="true">&times;</span>
+</button>
+<h2 style="text-align: center;">{{ data.fullName }} - Details</h2>
+<div class="details-dialog-wrapper">
+  <div class="profile-img-wrapper">
+    <ng-container>
+        @if (data.profilePicPath) {
+            <img [src]="'http://localhost:3000/' + data.profilePicPath" alt="{{ data.fullName }}" class="profile-pic-large" />
+        } @else {
+             <span class="profile-pic-large no-image-placeholder">
+                No Image
+            </span>
+        }
+      
+    </ng-container>
+  </div>
+  <div class="details-grid">
+    <div>
+      <strong>Email:</strong> {{ data.emailId || '-' }}<br />
+      <strong>Contact:</strong> {{ data.contactNumber || '-' }}<br />
+      <strong>Date of Birth:</strong> {{ data.dob ? (data.dob | date:'longDate') : '-' }}<br />
+      <strong>Food Preference:</strong> {{ data.foodPreference || '-' }}<br />
+      <strong>Year Of Admission:</strong> {{ data.yearOfAdmission || '-' }}<br />
+      <strong>Occupation:</strong> {{ data.occupation || '-' }}<br />
+      <strong>Expertise:</strong> {{ data.areaOfExpertise || '-' }}<br />
+      <strong>Donate:</strong> {{ data.donate || '-' }}
+    </div>
+    <div>
+      <strong>Batch:</strong> {{ data.batch || '-' }}<br />
+      <strong>Gender:</strong> {{ data.gender || '-' }}<br />
+      <strong>Blood Group:</strong> {{ data.bloodGroup || '-' }}<br />
+      <strong>Address:</strong> {{ data.currentAddress || '-' }}<br />
+      <strong>Year Of Passing:</strong> {{ data.yearOfPassing || '-' }}<br />
+      <strong>Organization:</strong> {{ data.organization || '-' }}<br />
+      <strong>Mentor Juniors:</strong> {{ data.mentorJuniors || '-' }}<br />
+      <strong>Available for Reunion:</strong> {{ data.availableForReunion || '-' }}
+    </div>
+  </div>
+</div>
