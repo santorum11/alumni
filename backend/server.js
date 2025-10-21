@@ -224,19 +224,92 @@ app.post('/api/contact', (req, res) => {
 });
 
 // Get all blogs with comments and vote counts
+// app.get('/api/blogs', (req, res) => {
+//   const query = `
+//     SELECT b.id, b.title, b.content, b.created_at,
+//       (SELECT COUNT(*) FROM likes_dislikes WHERE post_type='blog' AND post_id=b.id AND vote='like') AS likesCount,
+//       (SELECT COUNT(*) FROM likes_dislikes WHERE post_type='blog' AND post_id=b.id AND vote='dislike') AS dislikesCount
+//     FROM blogs b
+//     ORDER BY b.created_at DESC
+//   `;
+
+//   connection.query(query, (err, blogs) => {
+//     if(err) return res.status(500).send(err);
+
+//     // For each blog, get comments and their vote counts
+//     const blogIds = blogs.map(b => b.id);
+//     if (blogIds.length === 0) return res.json([]);
+
+//     const commentsQuery = `
+//       SELECT c.id, c.blog_id, c.comment, c.created_at,
+//         (SELECT COUNT(*) FROM likes_dislikes WHERE post_type='comment' AND post_id=c.id AND vote='like') AS likesCount,
+//         (SELECT COUNT(*) FROM likes_dislikes WHERE post_type='comment' AND post_id=c.id AND vote='dislike') AS dislikesCount
+//       FROM comments c
+//       WHERE c.blog_id IN (?)
+//       ORDER BY c.created_at ASC
+//     `;
+
+//     connection.query(commentsQuery, [blogIds], (cErr, comments) => {
+//       if (cErr) return res.status(500).send(cErr);
+
+//       blogs.forEach(blog => {
+//         blog.comments = comments.filter(c => c.blog_id === blog.id);
+//       });
+
+//       res.json(blogs);
+//     });
+//   });
+// });
+
 app.get('/api/blogs', (req, res) => {
-  const query = `
+  const sql = `
     SELECT b.id, b.title, b.content, b.created_at,
+      (SELECT COUNT(*) FROM likes_dislikes WHERE post_type='blog' AND post_id=b.id AND vote='like') AS likesCount,
+      (SELECT COUNT(*) FROM likes_dislikes WHERE post_type='blog' AND post_id=b.id AND vote='dislike') AS dislikesCount
+    FROM blogs b
+    WHERE approved = true
+    ORDER BY b.created_at DESC
+  `;
+
+  connection.query(sql, (err, blogs) => {
+    if (err) return res.status(500).send(err);
+
+    const blogIds = blogs.map(b => b.id);
+    if (blogIds.length === 0) return res.json([]);
+
+    const commentsQuery = `
+      SELECT c.id, c.blog_id, c.comment, c.created_at,
+        (SELECT COUNT(*) FROM likes_dislikes WHERE post_type='comment' AND post_id=c.id AND vote='like') AS likesCount,
+        (SELECT COUNT(*) FROM likes_dislikes WHERE post_type='comment' AND post_id=c.id AND vote='dislike') AS dislikesCount
+      FROM comments c
+      WHERE c.blog_id IN (?)
+      ORDER BY c.created_at ASC
+    `;
+
+    connection.query(commentsQuery, [blogIds], (cErr, comments) => {
+      if (cErr) return res.status(500).send(cErr);
+
+      blogs.forEach(blog => {
+        blog.comments = comments.filter(c => c.blog_id === blog.id);
+      });
+
+      res.json(blogs);
+    });
+  });
+});
+
+app.get('/api/admin/blogs', authenticateAdmin, (req, res) => {
+  const sql = `
+    SELECT b.id, b.title, b.content, b.created_at, b.approved,
       (SELECT COUNT(*) FROM likes_dislikes WHERE post_type='blog' AND post_id=b.id AND vote='like') AS likesCount,
       (SELECT COUNT(*) FROM likes_dislikes WHERE post_type='blog' AND post_id=b.id AND vote='dislike') AS dislikesCount
     FROM blogs b
     ORDER BY b.created_at DESC
   `;
 
-  connection.query(query, (err, blogs) => {
-    if(err) return res.status(500).send(err);
+  connection.query(sql, (err, blogs) => {
+    if (err) return res.status(500).send(err);
 
-    // For each blog, get comments and their vote counts
     const blogIds = blogs.map(b => b.id);
     if (blogIds.length === 0) return res.json([]);
 
@@ -324,6 +397,109 @@ app.delete('/api/comments/:id', authenticateAdmin, (req, res) => {
   connection.query('DELETE FROM comments WHERE id = ?', [id], (err) => {
     if (err) return res.status(500).send(err);
     res.send({ message: 'Comment deleted' });
+  });
+});
+
+app.post('/api/donate', (req, res) => { 
+  const { name, email, phone, amount, reference } = req.body;
+const sql = "INSERT INTO donations (name, email, phone, amount, reference) VALUES (?, ?, ?, ?, ?)";
+  connection.query(sql, [name, email, phone, amount, reference], (err) => {
+    if (err) return res.status(500).send({ message: 'Failed to save donation' });
+    res.status(200).send({ message: 'Donation saved' });
+  });
+});
+
+app.post('/api/feedback', (req, res) => {
+  const { name, email, message } = req.body;
+  if (!name || !email || !message) {
+    return res.status(400).send({ message: "All fields required" });
+  }
+  const sql = "INSERT INTO feedback (name, email, message) VALUES (?, ?, ?)";
+  connection.query(sql, [name, email, message], (err) => {
+    if (err) return res.status(500).send({ message: 'Feedback save failed' });
+    res.status(200).send({ message: 'Feedback received!' });
+  });
+});
+
+app.patch('/api/blogs/:id/approve', authenticateAdmin, (req, res) => {
+  const blogId = req.params.id;
+  const sql = "UPDATE blogs SET approved = true WHERE id = ?";
+  connection.query(sql, [blogId], (err) => {
+    if (err) return res.status(500).send({ message: 'Error approving blog' });
+    res.status(200).send({ message: 'Blog approved successfully' });
+  });
+});
+
+const newsTableSql = `
+  CREATE TABLE IF NOT EXISTS news (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    category VARCHAR(50),
+    content LONGTEXT,
+    image_url VARCHAR(255),
+    published BOOLEAN DEFAULT false,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  )
+`;
+connection.query(newsTableSql, (err) => {
+  if (err) console.error('Error creating news table:', err);
+});
+
+// Get published news (public)
+app.get('/api/news', (req, res) => {
+  const sql = 'SELECT * FROM news WHERE published = true ORDER BY created_at DESC';
+  connection.query(sql, (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+// Get all news (admin)
+app.get('/api/admin/news', authenticateAdmin, (req, res) => {
+  const sql = 'SELECT * FROM news ORDER BY created_at DESC';
+  connection.query(sql, (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+// Create news
+app.post('/api/news', authenticateAdmin, (req, res) => {
+  const { title, category, content, image_url, published } = req.body;
+  const sql = 'INSERT INTO news (title, category, content, image_url, published) VALUES (?, ?, ?, ?, ?)';
+  connection.query(sql, [title, category, content, image_url, published], (err, result) => {
+    if (err) return res.status(500).send(err);
+    res.status(201).json({ message: 'News created', id: result.insertId });
+  });
+});
+
+// Update news
+app.put('/api/news/:id', authenticateAdmin, (req, res) => {
+  const { title, category, content, image_url, published } = req.body;
+  const sql = 'UPDATE news SET title=?, category=?, content=?, image_url=?, published=? WHERE id=?';
+  connection.query(sql, [title, category, content, image_url, published, req.params.id], (err) => {
+    if (err) return res.status(500).send(err);
+    res.json({ message: 'News updated' });
+  });
+});
+
+// Publish/unpublish news
+app.patch('/api/news/:id/publish', authenticateAdmin, (req, res) => {
+  const { published } = req.body;
+  const sql = 'UPDATE news SET published=? WHERE id=?';
+  connection.query(sql, [published, req.params.id], (err) => {
+    if (err) return res.status(500).send(err);
+    res.json({ message: 'News status updated' });
+  });
+});
+
+// Delete news
+app.delete('/api/news/:id', authenticateAdmin, (req, res) => {
+  const sql = 'DELETE FROM news WHERE id=?';
+  connection.query(sql, [req.params.id], (err) => {
+    if (err) return res.status(500).send(err);
+    res.json({ message: 'News deleted' });
   });
 });
 

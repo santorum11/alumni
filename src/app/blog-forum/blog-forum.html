@@ -16,7 +16,7 @@
     <div class="actions">
       <button (click)="vote(blog.id, 'blog', 'like')">👍 {{ blog.likesCount || 0 }}</button>
       <button (click)="vote(blog.id, 'blog', 'dislike')">👎 {{ blog.dislikesCount || 0 }}</button>
-      <button *ngIf="isAdmin" (click)="deleteBlog(blog.id)">Delete</button>
+      <!-- <button *ngIf="isAdmin" (click)="deleteBlog(blog.id)">Delete</button> -->
     </div>
 
     <!-- Comments -->
@@ -26,7 +26,7 @@
         <div class="actions">
           <button (click)="vote(comment.id, 'comment', 'like')">👍 {{ comment.likesCount || 0 }}</button>
           <button (click)="vote(comment.id, 'comment', 'dislike')">👎 {{ comment.dislikesCount || 0 }}</button>
-          <button *ngIf="isAdmin" (click)="deleteComment(comment.id)">Delete</button>
+          <!-- <button *ngIf="isAdmin" (click)="deleteComment(comment.id)">Delete</button> -->
         </div>
       </div>
       <input [(ngModel)]="newComments[blog.id]" placeholder="Write a comment..." />

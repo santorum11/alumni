@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
@@ -6,6 +6,15 @@ export class BlogService {
   baseUrl = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient) {}
+
+  private getAuthHeaders() {
+    const token = localStorage.getItem('adminAuthToken');
+    return {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
+  }
 
   getBlogs() {
     return this.http.get<any[]>(`${this.baseUrl}/blogs`);
@@ -24,10 +33,20 @@ export class BlogService {
   }
 
   deleteBlog(blogId: number) {
-    return this.http.delete(`${this.baseUrl}/blogs/${blogId}`);
+    return this.http.delete(`${this.baseUrl}/blogs/${blogId}`, this.getAuthHeaders());
   }
 
   deleteComment(commentId: number) {
-    return this.http.delete(`${this.baseUrl}/comments/${commentId}`);
+    return this.http.delete(`${this.baseUrl}/comments/${commentId}`, this.getAuthHeaders());
+  }
+
+  approveBlog(blogId: number) {
+    return this.http.patch(`${this.baseUrl}/blogs/${blogId}/approve`, {}, this.getAuthHeaders());
+  }
+
+  getAdminBlogs() {
+    const token = localStorage.getItem('adminAuthToken');
+    const headers = { Authorization: `Bearer ${token}` };
+    return this.http.get<any[]>(`${this.baseUrl}/admin/blogs`, { headers });
   }
 }

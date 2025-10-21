@@ -13,6 +13,8 @@ import { GoogleMap } from './google-map/google-map';
 import { DonationPage } from './donation-page/donation-page';
 import { BlogForum } from './blog-forum/blog-forum';
 import { Events } from './events/events';
+import { Feedback } from './feedback/feedback';
+import { News } from './news/news';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -29,6 +31,8 @@ export const routes: Routes = [
     { path: 'donate', component: DonationPage },
     { path: 'forum', component: BlogForum },
     { path: 'events', component: Events },
+    { path: 'feedback', component: Feedback },
+    { path: 'news', component: News },
 
     // Optional wildcard route for 404
     { path: '**', redirectTo: '', pathMatch: 'full' },

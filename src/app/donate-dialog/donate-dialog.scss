@@ -1,0 +1,82 @@
+.donate-dialog-container {
+  background: #f8fafc;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(48, 60, 112, 0.18);
+  padding: 36px 30px;
+  max-width: 410px;
+
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #123d6a;
+    margin-bottom: 30px;
+    letter-spacing: 0.5px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+    margin-top: 18px;
+
+    .donate-field {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      label {
+        font-weight: 500;
+        font-size: 1.07rem;
+        margin-bottom: 6px;
+        color: #204881;
+        letter-spacing: 0.2px;
+      }
+
+      input {
+        border: 1.5px solid #d0d8e9;
+        border-radius: 12px;
+        padding: 14px 16px;
+        font-size: 1.13rem;
+        background: #f0f6fa;
+        transition: border 0.2s;
+      }
+
+      input:focus {
+        border-color: #377dff;
+        background: #ffffff;
+        outline: none;
+      }
+
+      input.ng-invalid.ng-touched {
+        border-color: #d84343;
+        background: #fffafa;
+      }
+    }
+  }
+
+  .donate-btn, button[type="submit"] {
+    margin-top: 18px;
+    background: linear-gradient(45deg, #377dff, #255fcc);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.18rem;
+    padding: 12px 0;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(55, 125, 255, 0.16);
+    transition: background 0.2s;
+    width: 100%;
+
+    &:hover {
+      background: linear-gradient(45deg, #255fcc, #1846c0);
+    }
+    &:disabled {
+      background: #c6cbda;
+      color: #fff;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+  }
+}

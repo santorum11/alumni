@@ -1,4 +1,4 @@
-<button mat-icon-button mat-dialog-close class="close-btn" aria-label="Close dialog">
+<!-- <button mat-icon-button mat-dialog-close class="close-btn" aria-label="Close dialog">
   <span aria-hidden="true">&times;</span>
 </button>
 <h2 style="text-align: center;">{{ data.fullName }} - Details</h2>
@@ -37,4 +37,107 @@
       <strong>Available for Reunion:</strong> {{ data.availableForReunion || '-' }}
     </div>
   </div>
+</div> -->
+
+<button mat-icon-button mat-dialog-close class="close-btn" aria-label="Close dialog">
+  <span aria-hidden="true">&times;</span>
+</button>
+
+<div class="details-dialog-wrapper">
+  <h2 class="dialog-title">{{ data.fullName }}</h2>
+  
+  <div class="profile-img-wrapper">
+    @if (data.profilePicPath) {
+      <img [src]="'http://localhost:3000/' + data.profilePicPath" 
+           alt="{{ data.fullName }}" 
+           class="profile-pic-large" />
+    } @else {
+      <span class="profile-pic-large no-image-placeholder">
+        No Image
+      </span>
+    }
+  </div>
+
+  <div class="details-grid">
+    <div class="detail-item">
+      <span class="label">Email:</span>
+      <span class="value">{{ data.emailId || '-' }}</span>
+    </div>
+    
+    <div class="detail-item">
+      <span class="label">Batch:</span>
+      <span class="value">{{ data.batch || '-' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Contact:</span>
+      <span class="value">{{ data.contactNumber || '-' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Gender:</span>
+      <span class="value">{{ data.gender || '-' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Date of Birth:</span>
+      <span class="value">{{ data.dob ? (data.dob | date:'longDate') : '-' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Blood Group:</span>
+      <span class="value">{{ data.bloodGroup || '-' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Food Preference:</span>
+      <span class="value">{{ data.foodPreference || '-' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Address:</span>
+      <span class="value">{{ data.currentAddress || '-' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Year Of Admission:</span>
+      <span class="value">{{ data.yearOfAdmission || '-' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Year Of Passing:</span>
+      <span class="value">{{ data.yearOfPassing || '-' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Occupation:</span>
+      <span class="value">{{ data.occupation || '-' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Organization:</span>
+      <span class="value">{{ data.organization || '-' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Expertise:</span>
+      <span class="value">{{ data.areaOfExpertise || '-' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Mentor Juniors:</span>
+      <span class="value">{{ data.mentorJuniors || '-' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Donate:</span>
+      <span class="value">{{ data.donate || '-' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="label">Available for Reunion:</span>
+      <span class="value">{{ data.availableForReunion || '-' }}</span>
+    </div>
+  </div>
 </div>
+

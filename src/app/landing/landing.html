@@ -64,4 +64,137 @@
   </div>
 </div>
   </mat-tab>
+
+<!-- Tab 3: Discussion Management (admin only) -->
+  <mat-tab label="Discussion Management" *ngIf="isAdmin">
+    <div class="discussion-management-container">
+      <h2>📝 Discussion Forum Management</h2>
+
+      <div class="search-bar">
+        <input 
+          [(ngModel)]="searchTerm" 
+          placeholder="Search blogs by title..."
+          class="search-input"
+        />
+      </div>
+
+      <div *ngIf="loadingBlogs" class="loading">Loading blogs...</div>
+
+      <div *ngIf="!loadingBlogs && filteredBlogs.length === 0" class="no-data">
+        No discussion posts found
+      </div>
+
+      <div *ngIf="!loadingBlogs && filteredBlogs.length > 0" class="blogs-list">
+        <div *ngFor="let blog of filteredBlogs" class="blog-card">
+          <div class="blog-header">
+            <h3>{{ blog.title }}</h3>
+            <button
+                class="approve-blog-btn"
+                *ngIf="!blog.approved"
+                (click)="approveBlog(blog.id)"
+                title="Approve Blog">
+                ✅ Approve
+            </button>
+            <button 
+              class="delete-blog-btn" 
+              (click)="deleteBlog(blog.id)"
+              title="Delete Blog">
+              🗑️ Delete
+            </button>
+          </div>
+
+          <p class="blog-content">{{ blog.content | slice:0:200 }}...</p>
+
+          <div class="blog-meta">
+            <span class="meta-item">👤 {{ blog.author || 'Anonymous' }}</span>
+            <span class="meta-item">📅 {{ blog.created_at | date:'short' }}</span>
+            <span class="meta-item">💬 {{ blog.comments?.length || 0 }} comments</span>
+          </div>
+
+          <!-- Comments Section -->
+          <div class="comments-section" *ngIf="blog.comments && blog.comments.length > 0">
+            <h4>Comments ({{ blog.comments.length }})</h4>
+            
+            <div *ngFor="let comment of blog.comments" class="comment-item">
+              <div class="comment-header">
+                <span class="comment-text">{{ comment.comment }}</span>
+                <button 
+                  class="delete-comment-btn" 
+                  (click)="deleteComment(comment.id)"
+                  title="Delete Comment">
+                  ✕
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+
+  <!-- Tab 4: News and Updates Management (admin only) -->
+<mat-tab label="News & Updates" *ngIf="isAdmin">
+  <div class="news-management-container">
+    <div class="news-topbar">
+        <h2>📰 News and Updates Management</h2>
+        
+        <button mat-raised-button color="primary" (click)="openNewsForm()">Add News</button>
+    </div>
+    <div *ngIf="showNewsForm" class="news-form">
+      <form (ngSubmit)="saveNews()">
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput [(ngModel)]="newNews.title" name="title" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Category</mat-label>
+          <mat-select [(ngModel)]="newNews.category" name="category">
+            <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Content</mat-label>
+          <textarea matInput [(ngModel)]="newNews.content" name="content" rows="4" required></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Image URL</mat-label>
+          <input matInput [(ngModel)]="newNews.image_url" name="image_url" />
+        </mat-form-field>
+
+        <mat-checkbox [(ngModel)]="newNews.published" name="published">Published</mat-checkbox>
+
+        <div class="form-buttons">
+          <button mat-raised-button color="primary" type="submit">{{ editingNews ? 'Update' : 'Create'}}</button>
+          <button mat-button type="button" (click)="closeNewsForm()">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <mat-accordion *ngIf="!showNewsForm">
+      <mat-expansion-panel *ngFor="let news of newsList">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ news.title }}</mat-panel-title>
+          <mat-panel-description>
+            {{ news.category }} | {{ news.published ? 'Published' : 'Draft' }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <p>{{ news.content }}</p>
+        <img *ngIf="news.image_url" [src]="news.image_url" alt="news image" class="news-image" />
+
+        <div class="news-actions">
+          <button mat-button color="primary" (click)="editNews(news)">Edit</button>
+          <button mat-button color="warn" (click)="deleteNews(news.id)">Delete</button>
+          <button mat-button (click)="togglePublish(news)">
+            {{ news.published ? 'Unpublish' : 'Publish' }}
+          </button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</mat-tab>
+
 </mat-tab-group>

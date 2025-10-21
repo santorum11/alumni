@@ -1,0 +1,27 @@
+.feedback-form-container {
+  max-width: 365px;
+  margin: 34px auto;
+  background: #fefeff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(40,60,110,.07);
+  padding: 28px 50px 20px 25px;
+
+  h2 { font-size: 1.45rem; color: #245898; text-align: center; margin-bottom: 23px; }
+
+  .field { margin-bottom: 17px; }
+  label { font-weight: 500; margin-bottom: 6px; color: #21478c; display: block; }
+  input, textarea {
+    width: 100%; border: 1.2px solid #ccd3ea; border-radius: 8px;
+    font-size: 1.07rem; padding: 11px 9px;
+    background: #f7fafd;
+    &:focus { border-color: #377dff; outline: none; background: #fff; }
+    margin-top: 3px;
+  }
+  button {
+    width: 100%; margin-top: 13px; background: #275dd8; color: #fff;
+    border: none; border-radius: 8px; font-weight: 600; font-size: 1.08rem;
+    padding: 12px 0; cursor: pointer;
+    &:disabled { background: #b0b7c7; }
+  }
+  .thankyou-msg { color: #22aa44; margin-top: 15px; text-align: center; }
+}

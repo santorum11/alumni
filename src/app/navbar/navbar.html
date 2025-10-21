@@ -1,7 +1,7 @@
 <nav class="navbar">
   <div class="logo-group">
     <img src="logo.png" alt="School Logo" class="logo" />
-    <span class="title">Mahalakshmi Nodal Alumni Portal</span>
+    <span class="title"> <a routerLink="/home" class="no-style">Mahalakshmi Nodal Alumni Portal</a></span>
   </div>
   <button class="hamburger" (click)="toggleMenu()" aria-label="Toggle menu" [attr.aria-expanded]="isMenuOpen">
     <span></span>
@@ -9,6 +9,19 @@
     <span></span>
   </button>
   <ul class="nav-menu" [class.menu-active]="isMenuOpen">
+    @if (isLoggedIn) {
+        <a
+            class="admin-icon-btn" 
+            (click)="goToAdminPanel()"
+            title="Go to Admin Panel"
+            aria-label="Admin Panel">
+            <span class="material-icons">person</span>
+        </a>
+    } @else {
+        <a routerLink="/home" class="home-icon" aria-label="Home">
+            <span class="material-icons">home</span>
+        </a>
+    }
     <li class="dropdown">
       <button class="dropdown-toggle" (click)="toggleDropdown(0)">Essential Buttons</button>
       <ul class="dropdown-menu" [class.show]="isDropdownOpen[0]">
@@ -48,5 +61,13 @@
         <li><a routerLink="/student-achievements" (click)="closeAll()">Student Achievements 🌱</a></li>
       </ul>
     </li>
+    @if (isLoggedIn) {
+        <li class="logout-item">
+            <button class="logout-btn" (click)="logout()" title="Logout">
+            <span class="material-icons">logout</span>
+            <span class="logout-text">Logout</span>
+            </button>
+        </li>
+    }
   </ul>
 </nav>

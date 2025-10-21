@@ -54,6 +54,36 @@ li {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
+.donate-now-btn {
+  background: linear-gradient(45deg, #377dff, #255fcc);
+  color: white;
+  font-weight: 700;
+  font-size: 1.3rem;
+  padding: 14px 48px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(55, 125, 255, 0.5);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block;
+  user-select: none;
+
+  &:hover {
+    background: linear-gradient(45deg, #255fcc, #1a3fa8);
+    box-shadow: 0 9px 30px rgba(37, 95, 204, 0.75);
+  }
+
+  &:active {
+    background: #1a3fa8;
+    box-shadow: none;
+  }
+
+  &:focus {
+    outline: 3px solid #a0c0ff;
+    outline-offset: 2px;
+  }
+}
+
 
 @media(max-width: 700px){
   .donation-page {

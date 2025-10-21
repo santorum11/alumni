@@ -1,0 +1,41 @@
+<div class="news-container">
+  <h1>📰 News & Updates</h1>
+
+  <div *ngIf="loading" class="loading">Loading news...</div>
+
+  <div *ngIf="!loading && newsList.length === 0" class="no-data">
+    No news available at the moment
+  </div>
+
+  <!-- News Grid -->
+  <div *ngIf="!loading && newsList.length > 0" class="news-grid">
+    <div *ngFor="let news of newsList" class="news-card" (click)="selectNews(news)">
+      <div class="news-image-wrapper" *ngIf="news.image_url">
+        <img [src]="'http://localhost:3000/' + news.image_url" alt="{{ news.title }}" class="news-image" />
+      </div>
+      <div class="news-content">
+        <h3 class="news-title">{{ news.title }}</h3>
+        <p class="news-category">📌 {{ news.category }}</p>
+        <p class="news-excerpt">{{ news.content | slice:0:150 }}...</p>
+        <div class="news-meta">
+          <span class="news-date">📅 {{ news.created_at | date:'short' }}</span>
+          <span class="read-more">Read More →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail View Modal -->
+  <div *ngIf="selectedNews" class="modal-overlay" (click)="closeDetail()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-btn" (click)="closeDetail()">✕</button>
+      <div *ngIf="selectedNews.image_url" class="modal-image">
+        <img [src]="'http://localhost:3000/' + selectedNews.image_url" alt="{{ selectedNews.title }}" />
+      </div>
+      <h2>{{ selectedNews.title }}</h2>
+      <p class="category-badge">{{ selectedNews.category }}</p>
+      <p class="date-published">Published: {{ selectedNews.created_at | date:'fullDate' }}</p>
+      <div class="news-body">{{ selectedNews.content }}</div>
+    </div>
+  </div>
+</div>

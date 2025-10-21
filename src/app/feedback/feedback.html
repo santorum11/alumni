@@ -1,0 +1,21 @@
+<div class="feedback-form-container">
+  <h2>We Value Your Feedback</h2>
+  <form [formGroup]="feedbackForm" (ngSubmit)="submitForm()">
+    <div class="field">
+      <label>Name*</label>
+      <input formControlName="name" required>
+    </div>
+    <div class="field">
+      <label>Email*</label>
+      <input type="email" formControlName="email" required>
+    </div>
+    <div class="field">
+      <label>Your Feedback*</label>
+      <textarea formControlName="message" rows="4" required></textarea> 
+    </div>
+    <button type="submit" [disabled]="feedbackForm.invalid">Send Feedback</button>
+    @if(submitted) {
+      <div class="thankyou-msg">Thank you for your feedback!</div>
+    }
+  </form>
+</div>

@@ -1,0 +1,67 @@
+<!-- <h2>Donate</h2>
+<form [formGroup]="donateForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="email" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Phone</mat-label>
+    <input matInput formControlName="phone" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Amount (INR)</mat-label>
+    <input matInput type="number" formControlName="amount" />
+  </mat-form-field> -->
+
+  <!-- Integrate Payment Gateway Here -->
+  <!-- <app-payment-gateway
+    *ngIf="donateForm.valid"
+    [formData]="donateForm.value"></app-payment-gateway> -->
+
+  <!-- <button mat-raised-button color="primary" type="submit" [disabled]="donateForm.invalid">
+    Proceed to Payment
+  </button>
+</form> -->
+
+<div class="donate-dialog-container">
+  <h2>Donation Details</h2>
+  <form [formGroup]="donateForm" (ngSubmit)="onSubmit()">
+    <div class="donate-field">
+      <label for="donorName">Name<span style="color:#d84343">*</span></label>
+      <input id="donorName" type="text" formControlName="name" required>
+    </div>
+
+    <div class="donate-field">
+      <label for="donorEmail">Email<span style="color:#d84343">*</span></label>
+      <input id="donorEmail" type="email" formControlName="email" required>
+    </div>
+
+    <div class="donate-field">
+      <label for="donorPhone">Phone<span style="color:#d84343">*</span></label>
+      <input id="donorPhone" type="text" formControlName="phone" required>
+    </div>
+
+    <div class="donate-field">
+      <label for="donorAmount">Amount (INR)<span style="color:#d84343">*</span></label>
+      <input id="donorAmount" type="number" formControlName="amount" required>
+    </div>
+
+    <div class="donate-field">
+      <label for="donorReference">Reference Number<span style="color:#d84343">*</span></label>
+      <input id="donorReference" type="text" formControlName="reference" required>
+    </div>
+
+    <button class="donate-btn" type="submit" [disabled]="donateForm.invalid">
+      Proceed to Payment
+    </button>
+  </form>
+</div>
+
+

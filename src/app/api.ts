@@ -48,4 +48,13 @@ export class Api {
     });
     return this.http.get(`${this.baseUrl}/${endpoint}`, { headers });
   }
+
+  donate(data: any): Observable<any> {
+    return this.post('donate', data);
+  }
+
+  feedback(data: any): Observable<any> {
+    return this.post('feedback', data);
+  }
+  
 }

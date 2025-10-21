@@ -1,90 +1,156 @@
 .details-dialog-wrapper {
-  width: 600px;
-  max-width: 95vw;
-  padding: 0 5px 16px 5px;
+  width: 680px;
+  max-width: 96vw;
+  padding: 24px 28px 32px 28px;
   box-sizing: border-box;
   margin: 0 auto;
+  overflow: visible;
+  background: #ffffff;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.dialog-title {
+  text-align: center;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #1a2332;
+  margin: 0 0 24px 0;
+  letter-spacing: 0.3px;
 }
 
 .profile-img-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 16px 0 20px 0;
+  margin: 0 0 28px 0;
 }
 
 .profile-pic-large, .no-image-placeholder {
-  width: 150px;
-  height: 150px;
+  width: 160px;
+  height: 160px;
   object-fit: cover;
-  border-radius: 12px;
-  background: #f0f0f0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e8edf5 0%, #dce4f0 100%);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
   font-style: italic;
-  font-size: 16px;
-  color: #888;
+  font-size: 15px;
+  color: #7a8494;
+  border: 4px solid #fff;
 }
 
 .details-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-top: 10px;
-  padding-left: 5px;
-  padding-right: 5px;
+  gap: 18px 32px;
+  margin-top: 0;
 }
 
-.details-grid > div {
-  font-size: 15px;
-  line-height: 1.8;
-  word-break: break-word;
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 16px;
+  background: #f8fafe;
+  border-radius: 10px;
+  border-left: 4px solid #5a7bb5;     // Make border thicker and more visible
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(90, 123, 181, 0.15);
+    border-left-color: #3d5a8f;  
+  }
+
+  .label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4a5568;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .value {
+    font-size: 15.5px;
+    color: #1a2332;
+    font-weight: 400;
+    word-break: break-word;
+    line-height: 1.6;
+  }
+}
+
+/* Overlay scrollbar - doesn't take space */
+::ng-deep .mat-mdc-dialog-container {
+  overflow-y: overlay !important;  /* Corrected from overflow-x */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(90, 123, 181, 0.6) transparent;
+}
+
+::ng-deep .mat-mdc-dialog-container::-webkit-scrollbar {
+  width: 7px;
+}
+
+::ng-deep .mat-mdc-dialog-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::ng-deep .mat-mdc-dialog-container::-webkit-scrollbar-thumb {
+  background: rgba(90, 123, 181, 0.6);
+  border-radius: 10px;
+}
+
+::ng-deep .mat-mdc-dialog-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(90, 123, 181, 0.8);
 }
 
 .close-btn {
   position: absolute;
-  top: 14px;
-  right: 18px;
-  z-index: 1;
-  font-size: 26px;
+  top: 18px;
+  right: 22px;
+  z-index: 10;
+  font-size: 30px;
   color: #888;
   background: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
   line-height: 1;
-  transition: color 0.2s;
-}
-.close-btn:hover {
-  color: #c00;
-  background: transparent;
+  transition: color 0.2s, transform 0.15s;
+
+  &:hover {
+    color: #d93636;
+    transform: scale(1.1);
+  }
 }
 
-
-@media (max-width: 700px) {
+@media (max-width: 750px) {
   .details-dialog-wrapper {
-    width: 100vw;
-    min-width: unset;
-    max-width: 98vw;
-    padding-left: 2vw;
-    padding-right: 2vw;
+    min-width: unset;              // Remove desktop min-width constraint
+    width: 98vw;                   // Take almost full width on mobile
+    padding: 18px 12px 24px 12px;  // Reduce padding for mobile
   }
+
+  .dialog-title {
+    font-size: 1.4rem;             // Smaller title on mobile
+  }
+
   .details-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding-left: 2vw;
-    padding-right: 2vw;
+    grid-template-columns: 1fr;    // Stack into SINGLE column
+    gap: 14px;                     // Tighter gap between items
   }
+
   .profile-img-wrapper {
-    margin-top: 10px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
+  }
+
+  .profile-pic-large, .no-image-placeholder {
+    width: 130px;                  // Smaller profile image
+    height: 130px;
   }
 }
 
-/* Extra: style for dialog actions if needed */
-.dialog-actions {
-  text-align: right;
-  margin-top: 12px;
-}
