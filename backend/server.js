@@ -516,6 +516,23 @@ app.delete('/api/news/:id', authenticateAdmin, (req, res) => {
   });
 });
 
+app.get('/api/admin/donations', authenticateAdmin, (req, res) => {
+  const sql = "SELECT id, name, email, phone, amount, reference, created_at FROM donations ORDER BY created_at DESC";
+  connection.query(sql, (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+// Get total donation sum - Admin only
+app.get('/api/admin/donations/total', authenticateAdmin, (req, res) => {
+  const sql = "SELECT SUM(amount) AS totalAmount FROM donations";
+  connection.query(sql, (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json({ total: results[0].totalAmount || 0 });
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
