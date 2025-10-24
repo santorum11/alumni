@@ -10,7 +10,13 @@ const app = express();
 //const port = 3000;
 const port = process.env.PORT || 3000;
 
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:4200',
+    'https://admirable-toffee-e77854.netlify.app'
+  ]
+}));
 app.use(bodyParser.json());
 app.use('/uploads', express.static('uploads'));
 
