@@ -6,7 +6,8 @@ const mysql = require('mysql2');
 const cors = require('cors');
 
 const app = express();
-const port = 3000;
+//const port = 3000;
+const port = 3306;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -14,10 +15,15 @@ app.use('/uploads', express.static('uploads'));
 
 // MySQL connection setup - update with your credentials
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Abhi@123',
-  database: 'alumni_db'
+  // host: 'localhost',
+  // user: 'root',
+  // password: 'Abhi@123',
+  // database: 'alumni_db'
+  host: 'sql12.freesqldatabase.com',
+  user: 'sql12804249',
+  password: 'QTtXuwRfPU',
+  database: 'sql12804249',
+  port: 3306
 });
 
 connection.connect(error => {
