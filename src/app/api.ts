@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class Api {
-  private baseUrl = 'http://localhost:3000/api'; // Modify if your backend base changes
+  private baseUrl = 'https://alumni-6fml.onrender.com/api'; // Modify if your backend base changes
   private tokenKey = 'adminAuthToken';
 
   constructor(private http: HttpClient) {}
