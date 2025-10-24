@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
@@ -7,7 +8,7 @@ const cors = require('cors');
 
 const app = express();
 //const port = 3000;
-const port = 3306;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -19,11 +20,11 @@ const connection = mysql.createConnection({
   // user: 'root',
   // password: 'Abhi@123',
   // database: 'alumni_db'
-  host: 'sql12.freesqldatabase.com',
-  user: 'sql12804249',
-  password: 'QTtXuwRfPU',
-  database: 'sql12804249',
-  port: 3306
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT
 });
 
 connection.connect(error => {
