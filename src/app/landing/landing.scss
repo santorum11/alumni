@@ -434,6 +434,59 @@ mat-row {
   box-shadow: 0 2px 8px rgba(34, 52, 84, 0.07);
 }
 
+.donation-container {
+  padding: 24px;
+  h2 {
+    margin-bottom: 12px;
+    color: #1c3a57;
+  }
+  .total-donation {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #2d6a4f;
+    margin-bottom: 16px;
+  }
+  .full-width-table {
+    width: 100%;
+    background-color: #f9fafd;
+  }
+  th {
+    background-color: #e3f2fd;
+    color: #1a1a1a;
+    font-weight: 600;
+  }
+  td {
+    color: #333;
+  }
+}
+
+.feedback-list-container {
+  margin: 24px 0;
+  h2 {
+    margin-bottom: 12px;
+    color: #355c7d;
+  }
+}
+.feedback-table {
+  width: 100%;
+  border-collapse: collapse;
+  th, td {
+    border: 1px solid #e0e0e0;
+    padding: 8px 10px;
+    font-size: 0.97rem;
+    text-align: left;
+  }
+  th {
+    background: #f0f6ff;
+    font-weight: 700;
+  }
+  tr:nth-child(even) td {
+    background: #f9fafc;
+  }
+}
+
+
+
 @media (max-width: 600px) {
   .news-form {
     padding: 18px 8px 16px 8px;

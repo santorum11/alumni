@@ -33,7 +33,7 @@ export class ImageUpload {
     }
     const formData = new FormData();
     this.selectedFiles.forEach(file => formData.append('images', file, file.name));
-    this.http.post('http://localhost:3000/api/upload-images', formData, {
+    this.http.post('https://api.mlhsalumni.in/api/upload-images', formData, {
       reportProgress: true,
       observe: 'events'
     }).subscribe(event => {

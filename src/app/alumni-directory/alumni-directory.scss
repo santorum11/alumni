@@ -1,0 +1,29 @@
+.directory-container {
+  margin: 30px auto;
+  max-width: 1000px;
+  h2 {
+    margin-bottom: 16px;
+    color: #204065;
+  }
+}
+.alumni-table {
+  width: 100%;
+  border-collapse: collapse;
+  th, td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  th {
+    background: #f2f6fc;
+    font-weight: 600;
+  }
+  tr:hover td {
+    background: #f7fbff;
+  }
+}
+.no-data {
+  padding: 18px;
+  color: #d84343;
+  text-align: center;
+}

@@ -1,57 +1,36 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-interface EventDetail {
-  name: string;
-  date: string;
-  time: string;
-  venue: string;
-}
+import { CommonModule, NgFor } from '@angular/common';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
-  selector: 'app-events',
+  selector: 'app-event',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './events.html',
-  styleUrls: ['./events.scss']
+  styleUrls: ['./events.scss'],
+  imports: [CommonModule, NgFor]
 })
-export class Events {
-  events: EventDetail[] = [
-    {
-      name: 'Alumni Opening Ceremony',
-      date: 'December 15, 2025',
-      time: '10:00 AM – 12:00 PM',
-      venue: 'Main Auditorium, Mahalakshmi Nodal High School'
-    },
-    {
-      name: 'Panel Discussion: Education & Careers',
-      date: 'December 16, 2025',
-      time: '2:00 PM – 4:00 PM',
-      venue: 'Conference Hall, School Premises'
-    },
-    {
-      name: 'Sports Meet & Cultural Program',
-      date: 'December 17, 2025',
-      time: '8:30 AM – 1:00 PM',
-      venue: 'School Ground'
-    },
-    {
-      name: 'Alumni Networking Evening',
-      date: 'December 18, 2025',
-      time: '5:30 PM – 8:00 PM',
-      venue: 'Alumni Lounge, School'
-    },
-    {
-      name: 'Reunion Banquet & Awards',
-      date: 'December 19, 2025',
-      time: '6:00 PM – 9:00 PM',
-      venue: 'Banquet Hall, City Center'
-    },
-    {
-      name: 'Family Day, Community Activities',
-      date: 'December 20, 2025',
-      time: '10:00 AM – 2:00 PM',
-      venue: 'School Campus – Outdoor Area'
-    }
+export class Events implements OnInit, OnDestroy {
+  images = [
+    { src: 'golden-4.JPG', alt: 'Golden Jubilee invitation' },
+    { src: 'golden-1.JPG', alt: 'Golden Jubilee then and now' }
   ];
+
+  currentIndex = 0;
+  private timer: any;
+
+  ngOnInit() {
+    this.timer = setInterval(() => this.next(), 5000);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.timer);
+  }
+
+  next() {
+    this.currentIndex = (this.currentIndex + 1) % this.images.length;
+  }
+
+  prev() {
+    this.currentIndex =
+      (this.currentIndex - 1 + this.images.length) % this.images.length;
+  }
 }

@@ -8,11 +8,36 @@ const cors = require('cors');
 
 const app = express();
 //const port = 3000;
+
+const allowedOrigins = [
+  'https://mlhsalumni.in',
+  'https://www.mlhsalumni.in',
+  'http://localhost:4200',
+  'https://admirable-toffee-e77854.netlify.app'
+];
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+  next();
+});
+
 const port = process.env.PORT || 3000;
 
 // app.use(cors());
 app.use(cors({
   origin: [
+    'https://mlhsalumni.in',
+    'https://www.mlhsalumni.in',
     'http://localhost:4200',
     'https://admirable-toffee-e77854.netlify.app'
   ]
@@ -30,7 +55,7 @@ const connection = mysql.createConnection({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  port: process.env.DB_PORT
+  port: process.env.DB_PORT || 3306
 });
 
 connection.connect(error => {
@@ -69,7 +94,7 @@ connection.connect(error => {
 
 const jwt = require('jsonwebtoken'); // Install with npm install jsonwebtoken
 
-const JWT_SECRET = 'yourVerySecretKeyValue';
+const JWT_SECRET = process.env.JWT_SECRET || 'yourVerySecretKeyValue';
 
 app.post('/api/admin-login', (req, res) => {
   const { emailOrUsername, password } = req.body;
@@ -530,6 +555,25 @@ app.get('/api/admin/donations/total', authenticateAdmin, (req, res) => {
   connection.query(sql, (err, results) => {
     if (err) return res.status(500).send(err);
     res.json({ total: results[0].totalAmount || 0 });
+  });
+});
+
+// Get all feedback (admin only for privacy, or public if you wish)
+app.get('/api/admin/feedback', authenticateAdmin, (req, res) => {
+  const sql = 'SELECT id, name, email, message, created_at FROM feedback ORDER BY created_at DESC';
+  connection.query(sql, (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+app.get('/api/users', authenticateAdmin, (req, res) => {
+  connection.query('SELECT * FROM alumni_registration', (err, results) => {
+    if (err) {
+      res.status(500).send({ message: 'Server error' });
+    } else {
+      res.status(200).send(results);
+    }
   });
 });
 

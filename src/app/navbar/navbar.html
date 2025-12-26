@@ -1,7 +1,7 @@
 <nav class="navbar">
   <div class="logo-group">
     <img src="logo.png" alt="School Logo" class="logo" />
-    <span class="title"> <a routerLink="/home" class="no-style">Mahalakshmi Nodal Alumni Portal</a></span>
+    <span class="title"> <a routerLink="/home" class="no-style">Mahalakshmi Alumni Portal</a></span>
   </div>
   <button class="hamburger" (click)="toggleMenu()" aria-label="Toggle menu" [attr.aria-expanded]="isMenuOpen">
     <span></span>
@@ -23,7 +23,7 @@
         </a>
     }
     <li class="dropdown">
-      <button class="dropdown-toggle" (click)="toggleDropdown(0)">Essential Buttons</button>
+      <button class="dropdown-toggle" (click)="toggleDropdown(0)">Essentials</button>
       <ul class="dropdown-menu" [class.show]="isDropdownOpen[0]">
         <li><a routerLink="/" (click)="closeAll()">Home 🏠</a></li>
         <li><a routerLink="/about" (click)="closeAll()">About Us ℹ️</a></li>

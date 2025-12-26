@@ -16,7 +16,7 @@ export class Gallery implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get<string[]>('http://localhost:3000/api/gallery-images')
+    this.http.get<string[]>('https://api.mlhsalumni.in/api/gallery-images')
       .subscribe(list => this.images = list);
   }
 

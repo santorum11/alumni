@@ -1,0 +1,28 @@
+
+<div class="directory-container">
+  <h2>Alumni Directory</h2>
+  <table class="alumni-table" *ngIf="alumniList.length > 0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Batch</th>
+        <th>Occupation</th>
+        <th>Organization</th>
+        <!-- Add other fields as required -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let alumnus of alumniList">
+        <td>{{ alumnus.fullName }}</td>
+        <td>{{ alumnus.emailId }}</td>
+        <td>{{ alumnus.batch }}</td>
+        <td>{{ alumnus.occupation }}</td>
+        <td>{{ alumnus.organization }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="alumniList.length === 0" class="no-data">
+    No alumni found.
+  </div>
+</div>

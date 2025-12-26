@@ -1,4 +1,4 @@
-<div class="events-container">
+<!-- <div class="events-container">
   <h2>Events & Programmes (Dec 15–20, 2025)</h2>
   <div class="event-card" *ngFor="let event of events">
     <div class="event-date">
@@ -10,4 +10,21 @@
       <div class="event-venue"><span class="venue-label">Venue:</span> {{ event.venue }}</div>
     </div>
   </div>
+</div> -->
+<div class="gj-page">
+  <h1>Event Highlights</h1>
+
+  <div class="gj-slider">
+    <div
+      class="gj-slide"
+      *ngFor="let img of images; let i = index"
+      [class.active]="i === currentIndex"
+    >
+      <img [src]="img.src" [alt]="img.alt" />
+    </div>
+
+    <button class="gj-nav prev" (click)="prev()">❮</button>
+    <button class="gj-nav next" (click)="next()">❯</button>
+  </div>
 </div>
+

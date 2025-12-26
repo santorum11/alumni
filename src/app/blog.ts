@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class BlogService {
-  baseUrl = 'https://alumni-6fml.onrender.com/api';
+  baseUrl = 'https://api.mlhsalumni.in/api';
 
   constructor(private http: HttpClient) {}
 

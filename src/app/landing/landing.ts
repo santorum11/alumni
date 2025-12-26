@@ -52,6 +52,8 @@ export class Landing implements OnInit {
   loadingBlogs = true;
   searchTerm = '';
 
+  feedbacks: any[] = [];
+
   newsList: any[] = [];
   loadingNews = true;
   showNewsForm = false;
@@ -64,6 +66,10 @@ export class Landing implements OnInit {
     published: false,
   };
   categories = ['General', 'Event', 'Achievement', 'Announcement', 'Update'];
+
+  donations: any[] = [];
+  totalDonation: number = 0;
+  displayedDonationColumns: string[] = ['id', 'name', 'email', 'phone', 'amount', 'reference', 'created_at'];
 
   constructor(private api: Api, private http: HttpClient, private dialog: MatDialog, private blogService: BlogService, 
     private router: Router) {}
@@ -81,6 +87,9 @@ export class Landing implements OnInit {
     if (this.isAdmin) {
       this.loadBlogs();
       this.loadNews();
+      this.loadDonations();
+      this.loadTotalDonation();
+      this.loadFeedback();
     }
   }
 
@@ -96,7 +105,7 @@ export class Landing implements OnInit {
     }
     const formData = new FormData();
     this.selectedFiles.forEach(file => formData.append('images', file, file.name));
-    this.http.post('http://localhost:3000/api/upload-images', formData, {
+    this.http.post('https://api.mlhsalumni.in/api/upload-images', formData, {
       reportProgress: true,
       observe: 'events',
       headers: { Authorization: `Bearer ${this.api.getToken()}` }
@@ -189,7 +198,7 @@ export class Landing implements OnInit {
 
   loadNews() {
     this.loadingNews = true;
-    this.http.get<any[]>('http://localhost:3000/api/admin/news', {
+    this.http.get<any[]>('https://api.mlhsalumni.in/api/admin/news', {
       headers: { Authorization: `Bearer ${this.api.getToken()}` },
     }).subscribe({
       next: (data) => {
@@ -200,6 +209,33 @@ export class Landing implements OnInit {
         alert('Failed to load news');
         this.loadingNews = false;
       }
+    });
+  }
+
+  loadDonations() {
+  this.http.get<any[]>('https://api.mlhsalumni.in/api/admin/donations', {
+    headers: { Authorization: `Bearer ${this.api.getToken()}` }
+  }).subscribe({
+    next: (data) => this.donations = data,
+    error: () => alert('Failed to load donation data')
+  });
+}
+
+loadTotalDonation() {
+  this.http.get<any>('https://api.mlhsalumni.in/api/admin/donations/total', {
+    headers: { Authorization: `Bearer ${this.api.getToken()}` }
+  }).subscribe({
+    next: (data) => this.totalDonation = data.total,
+    error: () => this.totalDonation = 0
+  });
+}
+
+loadFeedback() {
+    this.http.get<any[]>('https://api.mlhsalumni.in/api/admin/feedback', {
+      headers: { Authorization: `Bearer ${this.api.getToken()}` }
+    }).subscribe({
+      next: (data) => this.feedbacks = data,
+      error: () => alert('Could not load feedback')
     });
   }
 
@@ -222,7 +258,7 @@ export class Landing implements OnInit {
     }
 
     if (this.editingNews) {
-      this.http.put(`http://localhost:3000/api/news/${this.editingNews.id}`, this.newNews, {
+      this.http.put(`https://api.mlhsalumni.in/api/news/${this.editingNews.id}`, this.newNews, {
         headers: { Authorization: `Bearer ${this.api.getToken()}`}
       }).subscribe({
         next: () => {
@@ -233,7 +269,7 @@ export class Landing implements OnInit {
         error: () => alert('Failed to update news')
       });
     } else {
-      this.http.post(`http://localhost:3000/api/news`, this.newNews, {
+      this.http.post(`https://api.mlhsalumni.in/api/news`, this.newNews, {
         headers: { Authorization: `Bearer ${this.api.getToken()}` }
       }).subscribe({
         next: () => {
@@ -247,7 +283,7 @@ export class Landing implements OnInit {
   }
 
   togglePublish(news: any) {
-    this.http.patch(`http://localhost:3000/api/news/${news.id}/publish`, { published: !news.published }, {
+    this.http.patch(`https://api.mlhsalumni.in/api/news/${news.id}/publish`, { published: !news.published }, {
       headers: { Authorization: `Bearer ${this.api.getToken()}` }
     }).subscribe({
       next: () => {
@@ -260,7 +296,7 @@ export class Landing implements OnInit {
 
   deleteNews(id: number) {
     if (confirm('Delete this news post?')) {
-      this.http.delete(`http://localhost:3000/api/news/${id}`, {
+      this.http.delete(`https://api.mlhsalumni.in/api/news/${id}`, {
         headers: { Authorization: `Bearer ${this.api.getToken()}` }
       }).subscribe({
         next: () => {

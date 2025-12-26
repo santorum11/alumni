@@ -15,6 +15,8 @@ import { BlogForum } from './blog-forum/blog-forum';
 import { Events } from './events/events';
 import { Feedback } from './feedback/feedback';
 import { News } from './news/news';
+import { AlumniDirectory } from './alumni-directory/alumni-directory';
+import { GoldenJubilee } from './pages/golden-jubilee/golden-jubilee';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -33,6 +35,8 @@ export const routes: Routes = [
     { path: 'events', component: Events },
     { path: 'feedback', component: Feedback },
     { path: 'news', component: News },
+    { path: 'directory', component: AlumniDirectory },
+    { path: 'jubilee', component: GoldenJubilee },
 
     // Optional wildcard route for 404
     { path: '**', redirectTo: '', pathMatch: 'full' },
